@@ -12,7 +12,6 @@ namespace CrystalReportsSourceChange
     class Program
     {
         private const string ReportDirectory = "\\\\polsage01.aws.polaner.com\\Sage\\Sage 100 Premium\\MAS90\\Reports";
-        private const string TempDirectory = "\\\\polsage01.aws.polaner.com\\Sage\\Sage 100 Premium\\MAS90\\Reports\\temp";
         private static string[] fileEntries;
         private const string DatabaseName = "polsql01.aws.polaner.com";
 
@@ -44,10 +43,8 @@ namespace CrystalReportsSourceChange
 
         private static void ChangeServerName(Table table)
         {
-            TableLogOnInfo logOnInfo = new TableLogOnInfo();
-            ConnectionInfo connectionInfo = new ConnectionInfo();
-            logOnInfo = table.LogOnInfo;
-            connectionInfo = logOnInfo.ConnectionInfo;
+            var logOnInfo = table.LogOnInfo;
+            var connectionInfo = logOnInfo.ConnectionInfo;
             connectionInfo.ServerName = DatabaseName;
             connectionInfo.IntegratedSecurity = true;
             table.ApplyLogOnInfo(logOnInfo);
